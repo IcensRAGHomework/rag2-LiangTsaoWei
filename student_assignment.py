@@ -14,7 +14,7 @@ def hw02_1(q1_pdf):
     text_splitter = CharacterTextSplitter(chunk_overlap=0)
     chunks = text_splitter.split_documents(docs)
     if chunks:
-        print(chunks[-1])
+        return (chunks[-1])
     pass
 
 def hw02_2(q2_pdf):
