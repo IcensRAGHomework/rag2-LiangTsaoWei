@@ -27,9 +27,11 @@ def hw02_2(q2_pdf):
     # 使用 RecursiveCharacterTextSplitter 將文本切割成塊
     text_splitter = RecursiveCharacterTextSplitter(
         separators = [
-            r"\n*第\s*\d+\s*條\n*",
             r"第\s*[一二三四五六七八九十]+\s*章\s",
-            r"\n*第\s*\d+-\d+\s*條\n*",
+            r"\n第\s*\d+\s*條",
+            r"\n第\s*\d+-\d+\s*條",
+            r"第\s*\d+\s*條\n",
+            r"第\s*\d+-\d+\s*條\n",
         ],
         chunk_size=5,
         chunk_overlap=0,
