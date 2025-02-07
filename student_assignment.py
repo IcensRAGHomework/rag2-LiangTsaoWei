@@ -1,7 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import (CharacterTextSplitter,
                                       RecursiveCharacterTextSplitter)
-import re
 
 q1_pdf = "OpenSourceLicenses.pdf"
 q2_pdf = "勞動基準法.pdf"
@@ -27,21 +26,23 @@ def hw02_2(q2_pdf):
     
     # 使用 RecursiveCharacterTextSplitter 將文本切割成塊
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=6,
+        separators = [
+            r"第\s*\d+\s*條",
+            r"第\s*[一二三四五六七八九十]+\s*章\s",
+            r"第\s*\d+-\d+\s*條",
+        ],
+        chunk_size=5,
         chunk_overlap=0,
-        separators = [r"第\s*\d+\s*條"],
+        is_separator_regex=True
     )
     chunks = text_splitter.split_text(full_text)
-    
-    # 打印 chunks 的數量
-    print(f"Number of chunks: {len(chunks)}")
 
     if chunks:
         return (len(chunks))
     pass
 
-#if __name__ == "__main__":
-#     # last_chunk = hw02_1(q1_pdf)
-#     # print(last_chunk)
-#     chunk_count = hw02_2(q2_pdf)
-#     print(chunk_count)
+if __name__ == "__main__":
+     last_chunk = hw02_1(q1_pdf)
+     print(last_chunk)
+     chunk_count = hw02_2(q2_pdf)
+     print(chunk_count)
